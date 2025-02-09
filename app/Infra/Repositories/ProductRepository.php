@@ -12,4 +12,9 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::all();
     }
+
+    public function findByIds(array $ids): Collection
+    {
+        return Product::whereIn('id', $ids)->get();
+    }
 }
