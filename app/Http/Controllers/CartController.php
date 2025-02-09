@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Application\UseCases\Cart\AddProductToCartUseCase;
+use App\Application\UseCases\Cart\GetCartUseCase;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     
     public function __construct(
-        private AddProductToCartUseCase $addProductToCartUseCase
+        private AddProductToCartUseCase $addProductToCartUseCase,
+        private GetCartUseCase $getCartUseCase
     )
-    {
-        //
-    }
+    {}
 
     public function index()
     {
-        $cart = session()->get('cart', []);
+        $cart = $this->getCartUseCase->getCart();
 
-        dd($cart);
-
-        return view('cart.index');
+        return view('cart.index')
+            ->with('cart', $cart);
     }
 
     /**
@@ -37,45 +36,5 @@ class CartController extends Controller
         $result = $this->addProductToCartUseCase->addToCart($request->product_id, $request->quantity);
 
         return response()->json($result);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

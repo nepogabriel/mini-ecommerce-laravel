@@ -4,7 +4,7 @@ namespace App\Application\UseCases\Cart;
 
 class AddProductToCartUseCase
 {
-    public function addToCart(int $productId, $quantity)
+    public function addToCart(int $productId, $quantity): array
     {
         $cart = session()->get('cart', []);
 

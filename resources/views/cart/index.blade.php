@@ -23,10 +23,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="{{ route('product.index') }}">Nossos Produtos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -37,7 +37,50 @@
     </nav>
 
     <div class="container my-5">
-       <h1>Aqui é o carrinho!</h1>
+        <div class="row">
+        <div class="col-sm-12 col-md-8">
+        @foreach ($cart as $product)
+            <div class="card my-4">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <img src="/img/no-image.jpg" class="img-fluid rounded-start" alt="..." style="height: auto; width: 120px;">
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card-body d-flex justify-content-between">
+                            <div>
+                                <h5 class="card-title">{{ $product['name'] }}</h5>
+                                <p class="card-text">R$ {{ $product['price'] }}</p>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-danger add-to-cart" data-id="{{ $product['id'] }}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        </div>
+        
+        <div class="col-sm-12 col-md-4">
+        <div class="card my-4">
+            <div class="card-header">
+                Totais
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span>Subtotal:</span> <span>R$ 150.00</span></li>
+                <li class="list-group-item"><span>Frete:</span> <span>Grátis</span></li>
+                <li class="list-group-item"><span>Total:</span> <span>R$ 150.00</span></li>
+                <li class="list-group-item">
+                    <button class="btn btn-success">Finalizar Pedido</button>
+                </li>
+            </ul>
+        </div>
+        </div>
+        </div>
     </div>
 
     <footer class="bg-dark text-white py-3">
