@@ -39,7 +39,7 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-sm-12 col-md-8">
-                @if (!isset($cartItems['Empty']))
+                @if (!isset($cartItems['empty']))
                     @foreach ($cartItems as $item)
                         <div class="card my-4">
                             <div class="row g-0">
@@ -55,7 +55,7 @@
                                         </div>
 
                                         <div class="d-flex align-items-center">
-                                            <button class="btn btn-danger add-to-cart" data-id="{{ $item['id'] }}">
+                                            <button class="btn btn-danger remove-from-cart" data-id="{{ $item['id'] }}">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -134,6 +134,36 @@
         }
 
         loadCart();
+
+        function removeProductFromCart() {
+            document.querySelectorAll(".remove-from-cart").forEach(button => {
+                button.addEventListener("click", function () {
+                    const productId = this.getAttribute('data-id');
+
+                    fetch('/carrinho/remover', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        },
+                        body: JSON.stringify({ product_id: productId })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.message);
+                            location.reload();
+                        } else {
+                            alert(data.message);
+                            location.reload();
+                        }
+                    })
+                    .catch(error => console.error('Erro:', error));
+                });
+            });
+        }
+
+        removeProductFromCart();
     </script>
 </body>
 </html>

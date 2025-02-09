@@ -10,4 +10,17 @@ class CartRepository implements CartRepositoryInterface
     {
         return session()->get($sessionId, []);
     }
+
+    public function addCart(array $cart): void
+    {
+        session()->put('cart', $cart);
+    }
+
+    public function removeProductFromCart(int $productId): array
+    {
+        $cart = $this->getCartItems('cart');
+        unset($cart[$productId]);
+
+        return $cart;
+    }
 }

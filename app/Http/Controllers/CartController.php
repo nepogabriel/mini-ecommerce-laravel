@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Application\UseCases\Cart\AddProductToCartUseCase;
 use App\Application\UseCases\Cart\CalculateCartTotalUseCase;
 use App\Application\UseCases\Cart\GetCartUseCase;
+use App\Application\UseCases\Cart\RemoveProductFromCartUseCase;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -40,6 +41,25 @@ class CartController extends Controller
     public function getTotal()
     {
         $result = $this->calculateCartTotalUseCase->calculateCartToTotal('cart');
+
+        return response()->json($result);
+    }
+
+    public function removeProduct(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|integer',
+        ]);
+
+        $productId = $request->product_id;
+
+        if (!$productId) {
+            return response()->json(['success' => false, 'message' => 'ID do produto inválido'], 400);
+        }
+
+        // Executa o caso de uso
+        $useCase = app(RemoveProductFromCartUseCase::class);
+        $result = $useCase->removeProductFromCart($productId);
 
         return response()->json($result);
     }
