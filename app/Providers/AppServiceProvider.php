@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Domain\Repositories\CartRepositoryInterface;
 use App\Domain\Repositories\ProductRepositoryInterface;
+use App\Infra\Repositories\CartRepository;
 use App\Infra\Repositories\ProductRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
     }
 
     /**
