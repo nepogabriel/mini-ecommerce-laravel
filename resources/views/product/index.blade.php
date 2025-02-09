@@ -37,24 +37,28 @@
     </nav>
 
     <div class="container my-5">
-        @foreach ($products as $product)
-            <div class="card my-4">
-                <div class="row g-0">
-                    <div class="col-md-4 d-flex justify-content-center">
-                        <img src="/img/no-image.jpg" class="img-fluid rounded-start" alt="..." style="height: auto; width: 250px;">
-                    </div>
+        @if ($products != null)
+            @foreach ($products as $product)
+                <div class="card my-4">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <img src="/img/no-image.jpg" class="img-fluid rounded-start" alt="..." style="height: auto; width: 250px;">
+                        </div>
 
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <p class="card-text">R$ {{ $product->price }}</p>
-                            <button class="btn btn-success add-to-cart" data-id="{{ $product->id }}">Adicionar no carrinho</button>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                <p class="card-text">R$ {{ $product->price }}</p>
+                                <button class="btn btn-success add-to-cart" data-id="{{ $product->id }}">Adicionar no carrinho</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        @else
+            <p class="fw-bold my-4">Não existe produtos cadastrados!</p>
+        @endif
     </div>
 
     <footer class="bg-dark text-white py-3">

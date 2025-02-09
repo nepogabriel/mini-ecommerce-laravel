@@ -19,15 +19,12 @@ class CartController extends Controller
 
     public function index()
     {
-        $cart = $this->getCartUseCase->getCart();
+        $cartItems = $this->getCartUseCase->getCart();
 
         return view('cart.index')
-            ->with('cart', $cart);
+            ->with('cartItems', $cartItems);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function addToCart(Request $request)
     {
         $request->validate([

@@ -38,61 +38,65 @@
 
     <div class="container my-5">
         <div class="row">
-        <div class="col-sm-12 col-md-8">
-        @foreach ($cart as $product)
-            <div class="card my-4">
-                <div class="row g-0">
-                    <div class="col-md-4 d-flex justify-content-center">
-                        <img src="/img/no-image.jpg" class="img-fluid rounded-start" alt="..." style="height: auto; width: 120px;">
-                    </div>
+            <div class="col-sm-12 col-md-8">
+                @if (!isset($cartItems['Empty']))
+                    @foreach ($cartItems as $item)
+                        <div class="card my-4">
+                            <div class="row g-0">
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <img src="/img/no-image.jpg" class="img-fluid rounded-start" alt="..." style="height: auto; width: 120px;">
+                                </div>
 
-                    <div class="col-md-8 d-flex align-items-center">
-                        <div class="card-body d-flex justify-content-between">
-                            <div class="">
-                                <h5 class="card-title">{{ $product['name'] }}</h5>
-                                <p class="card-text">R$ {{ $product['price'] }}</p>
-                            </div>
+                                <div class="col-md-8 d-flex align-items-center">
+                                    <div class="card-body d-flex justify-content-between">
+                                        <div class="">
+                                            <h5 class="card-title">{{ $item['name'] }}</h5>
+                                            <p class="card-text">R$ {{ $item['price'] }}</p>
+                                        </div>
 
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-danger add-to-cart" data-id="{{ $product['id'] }}">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
+                                        <div class="d-flex align-items-center">
+                                            <button class="btn btn-danger add-to-cart" data-id="{{ $item['id'] }}">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    @endforeach
+                @else
+                    <p class="fw-bold my-4">{{ $cartItems['message'] }}</p>
+                @endif
+            </div>
+        
+            <div class="col-sm-12 col-md-4">
+                <div class="card my-4">
+                    <div class="card-header fw-bold">
+                        Totais
                     </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Subtotal:</span> <span id="subtotal"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Frete:</span> <span>R$ 0.00</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total:</span> <span id="total"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between text-success fw-bold">
+                            <span>No Pix (-10%):</span> <span id="discount"></span>
+                        </li>
+
+                        <li class="list-group-item">
+                            <button class="btn btn-success">Finalizar Pedido</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        @endforeach
-        </div>
-        
-        <div class="col-sm-12 col-md-4">
-        <div class="card my-4">
-            <div class="card-header fw-bold">
-                Totais
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Subtotal:</span> <span id="subtotal"></span>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Frete:</span> <span>R$ 0.00</span>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total:</span> <span id="total"></span>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between text-success fw-bold">
-                    <span>No Pix (-10%):</span> <span id="discount"></span>
-                </li>
-
-                <li class="list-group-item">
-                    <button class="btn btn-success">Finalizar Pedido</button>
-                </li>
-            </ul>
-        </div>
-        </div>
         </div>
     </div>
 

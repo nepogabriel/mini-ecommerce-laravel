@@ -19,7 +19,7 @@ class GetCartUseCase
 
         if (empty($cart)) {
             return [
-                'success' => false,
+                'Empty' => true,
                 'message' => 'O carrinho está vazio!',
                 'cart' => [],
             ];
