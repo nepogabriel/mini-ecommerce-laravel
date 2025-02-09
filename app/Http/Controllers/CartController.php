@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application\UseCases\Cart\AddProductToCartUseCase;
+use App\Application\UseCases\Cart\CalculateCartTotalUseCase;
 use App\Application\UseCases\Cart\GetCartUseCase;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class CartController extends Controller
     
     public function __construct(
         private AddProductToCartUseCase $addProductToCartUseCase,
-        private GetCartUseCase $getCartUseCase
+        private GetCartUseCase $getCartUseCase,
+        private CalculateCartTotalUseCase $calculateCartTotalUseCase
     )
     {}
 
@@ -34,6 +36,13 @@ class CartController extends Controller
         ]);
 
         $result = $this->addProductToCartUseCase->addToCart($request->product_id, $request->quantity);
+
+        return response()->json($result);
+    }
+
+    public function getTotal()
+    {
+        $result = $this->calculateCartTotalUseCase->calculateCartToTotal('cart');
 
         return response()->json($result);
     }

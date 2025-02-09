@@ -9,4 +9,5 @@ Route::get('/', [ProductController::class, 'index'])->name('product.index');
 Route::controller(CartController::class)->group(function () {
     Route::get('/carrinho', 'index')->name('cart.index');
     Route::post('/carrinho/adicionar','addToCart')->name('cart.add');
+    Route::get('/carrinho/total','getTotal')->name('cart.total');
 });

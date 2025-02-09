@@ -72,26 +72,25 @@
 
     <script>
         document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function() {
-            let productId = this.getAttribute('data-id');
-            alert(productId);
-            let quantity = 1; // ou pegue de um input se precisar
+            button.addEventListener('click', function() {
+                let productId = this.getAttribute('data-id');
+                let quantity = 1;
 
-            fetch('/carrinho/adicionar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({ product_id: productId, quantity: quantity })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-            })
-            .catch(error => console.error('Erro:', error));
+                fetch('/carrinho/adicionar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({ product_id: productId, quantity: quantity })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => console.error('Erro:', error));
+            });
         });
-    });
 
     </script>
 </body>
