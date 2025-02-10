@@ -56,17 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const checkoutBtn = document.getElementById("checkoutBtn");
     const responseDiv = document.getElementById("response");
 
-    // Mostrar/esconder parcelamento dependendo da forma de pagamento
     paymentMethodSelect.addEventListener("change", function () {
         installmentsContainer.style.display = this.value === "credit_card" ? "block" : "none";
     });
 
     checkoutBtn.addEventListener("click", function () {
-        // Dados do checkout
         let paymentMethod = paymentMethodSelect.value;
         let installments = paymentMethod === "credit_card" ? parseInt(document.getElementById("installments").value) : 1;
 
-        // Enviar para o backend via AJAX (Fetch API)
         fetch("{{ route('checkout.process') }}", {
             method: "POST",
             headers: {

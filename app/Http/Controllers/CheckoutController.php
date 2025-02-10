@@ -25,7 +25,6 @@ class CheckoutController extends Controller
             'installments' => 'nullable|integer|min:1|max:12'
         ]);
 
-        $cart = $request->input('cart');
         $paymentMethodType = $request->input('payment_method');
         $installments = $request->input('installments', 1);
 
