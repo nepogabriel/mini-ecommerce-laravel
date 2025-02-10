@@ -8,7 +8,7 @@ class CalculateCreditCardUseCase
 
     public function calculateCreditCard(float $price,  int $installments): float
     {
-        if ($installments) {
+        if ($installments == 1) {
             return $price;
         }
 
