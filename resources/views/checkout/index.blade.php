@@ -124,7 +124,7 @@
                             <span>Total:</span> <span id="total"></span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between text-success fw-bold" id="discount_pix">
+                        <li class="list-group-item justify-content-between text-success fw-bold" id="discount_pix" style="display: flex">
                             <span>No Pix (-10%):</span> <span id="discount"></span>
                         </li>
 
@@ -142,13 +142,15 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    loadCart();
+
     const paymentMethodSelect = document.getElementById("payment_method");
     const checkoutButton = document.getElementById("checkout_button");
     const responseDiv = document.getElementById("response");
 
     paymentMethodSelect.addEventListener("change", function () {
         document.getElementById("credit_card_container").style.display = this.value === "credit_card" ? "block" : "none";
-        //document.getElementById("discount_pix").style.display = this.value === "pix" ? "block" : "none";
+        document.getElementById("discount_pix").style.display = this.value === "pix" ? "block" : "none";
     });
 
     checkoutButton.addEventListener("click", function () {

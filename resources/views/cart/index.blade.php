@@ -72,7 +72,7 @@
             <div class="col-sm-12 col-md-4">
                 <div class="card my-4">
                     <div class="card-header fw-bold">
-                        Totais
+                        Resumo da compra
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between">
@@ -114,25 +114,6 @@
     <script type="text/javascript" src="{{ asset('/js/script.js') }}"></script>
 
     <script>
-        function loadCart() {
-            fetch('/carrinho/total', {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('subtotal').textContent = `R$ ${data.subtotal.toFixed(2)}`;
-
-                    document.getElementById('total').textContent = `R$ ${data.total.toFixed(2)}`;
-
-                    document.getElementById('discount').textContent = `R$ ${data.discountedTotal.toFixed(2)}`;
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => console.error('Erro:', error));
-        }
-
         loadCart();
 
         function removeProductFromCart() {
