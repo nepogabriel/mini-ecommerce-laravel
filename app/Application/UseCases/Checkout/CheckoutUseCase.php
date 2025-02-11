@@ -5,7 +5,7 @@ namespace App\Application\UseCases\Checkout;
 use App\Application\UseCases\Cart\CalculateCartTotalUseCase;
 use App\Application\UseCases\Order\CreateOrderUseCase;
 use App\Application\UseCases\Payment\ProcessPaymentUseCase;
-use App\Domain\Repositories\PaymentMethodInterface;
+use App\Domain\Services\PaymentMethodInterface;
 
 class CheckoutUseCase
 {

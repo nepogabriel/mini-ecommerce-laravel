@@ -2,7 +2,7 @@
 
 namespace App\Application\UseCases\Payment;
 
-use App\Domain\Repositories\PaymentMethodInterface;
+use App\Domain\Services\PaymentMethodInterface;
 
 class ProcessPaymentUseCase
 {
