@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="row g-0">
                             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                <img src="/img/no-image.jpg" class="img-fluid rounded-start" alt="..." style="height: 120px; width: auto;">
+                                <img src="/img/credit-card.png" class="img-fluid rounded-start" alt="..." style="height: auto; width: 80%;">
                             </div>
 
                             <div class="col-md-6 d-flex align-items-center">
