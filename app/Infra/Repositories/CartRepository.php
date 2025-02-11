@@ -23,4 +23,9 @@ class CartRepository implements CartRepositoryInterface
 
         return $cart;
     }
+
+    public function deleteCart(string $sessionId): void
+    {
+        session()->forget($sessionId);
+    }
 }
