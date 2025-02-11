@@ -92,7 +92,7 @@
                         </li>
 
                         <li class="list-group-item">
-                            <a href="{{ Route('checkout.index') }}" class="btn btn-success">Finalizar Pedido</a>
+                            <a href="{{ Route('checkout.index') }}" class="btn btn-success">Ir para o pagamento</a>
                         </li>
                     </ul>
                 </div>
