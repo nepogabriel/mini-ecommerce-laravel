@@ -147,7 +147,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const responseDiv = document.getElementById("response");
 
     paymentMethodSelect.addEventListener("change", function () {
-        document.getElementById("credit_card_container").style.display = this.value === "credit_card" ? "block" : "none"; 
+        let viewCreditCard = "none";
+
+        if (this.value === "credit_card") {
+            viewCreditCard = "block";
+            validateRealTime();
+        }
+
+        document.getElementById("credit_card_container").style.display = viewCreditCard; 
         document.getElementById("discount_pix").style.display = this.value === "pix" ? "block" : "none";
     });
 
@@ -202,6 +209,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         return true;
+    }
+
+    function validateRealTime() {
+        document.getElementById("number_card").addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, "").slice(0, 16);
+        });
+
+        document.getElementById("name_card").addEventListener("focusout", function () {
+            let words = this.value.trim().split(/\s+/);
+            if (words.length < 2) {
+                alert("Digite pelo menos nome e sobrenome.");
+            }
+        });
+
+        document.getElementById("document_card").addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, "").slice(0, 14);
+        });
+
+        document.getElementById("cvv_card").addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, "").slice(0, 3);
+        });
     }
 });
 </script>
