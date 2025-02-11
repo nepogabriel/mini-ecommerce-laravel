@@ -2,17 +2,17 @@
 
 namespace App\Application\UseCases\Order;
 
+use App\Domain\Repositories\OrderRepositoryInterface;
 use App\Models\Order;
 
 class CreateOrderUseCase
 {
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository
+    ) {}
+
     public function createOrder(float $total, string $paymentMethod, int|null $installments = 1): Order
     {
-        return Order::create([
-            'user_id' => 1,
-            'total' => $total,
-            'payment_method' => $paymentMethod,
-            'status' => 'pending',
-        ]);
+        return $this->orderRepository->createOrder($total, $paymentMethod, $installments);
     }
 }
