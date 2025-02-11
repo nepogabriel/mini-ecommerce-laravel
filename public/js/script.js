@@ -12,6 +12,7 @@ function loadCart() {
             document.getElementById('discount').textContent = `R$ ${data.discountedTotal.toFixed(2)}`;
         } else {
             alert(data.message);
+            window.location.replace("/");
         }
     })
     .catch(error => console.error('Erro:', error));
