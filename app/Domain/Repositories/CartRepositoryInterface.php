@@ -9,4 +9,6 @@ interface CartRepositoryInterface
     public function addCart(array $cart): void;
 
     public function removeProductFromCart(int $productId): array;
+
+    public function deleteCart(string $sessionId): void;
 }
