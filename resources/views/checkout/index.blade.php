@@ -62,7 +62,6 @@
                                             <div class="row">
                                                 <div class="col-sm-4 mb-3">
                                                     <label for="month_card" class="form-label">Mês*</label>
-                                                    <!-- <input type="text" name="month_card" class="form-control" id="month_card"> -->
                                                     <select id="month_card" class="form-select">
                                                         @for ($month = 1; $month <= 12; $month++)
                                                             <option value="{{ $month }}">{{ $month }}</option>
@@ -72,7 +71,6 @@
 
                                                 <div class="col-sm-4 mb-3">
                                                     <label for="year_card" class="form-label">Ano*</label>
-                                                    <!-- <input type="text" name="year_card" class="form-control" id="year_card"> -->
                                                     <select id="year_card" name="year_card" class="form-select">
                                                         @for ($year = 25; $year <= 30; $year++)
                                                             <option value="{{ $year }}">20{{ $year }}</option>
@@ -81,8 +79,8 @@
                                                 </div>
 
                                                 <div class="col-sm-4 mb-3">
-                                                    <label for="number_card" class="form-label">CVV*</label>
-                                                    <input type="text" name="number_card" class="form-control" id="number_card">
+                                                    <label for="cvv_card" class="form-label">CVV*</label>
+                                                    <input type="text" name="cvv_card" class="form-control" id="cvv_card">
                                                 </div>
                                             </div>
                                         </div>
@@ -149,15 +147,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const responseDiv = document.getElementById("response");
 
     paymentMethodSelect.addEventListener("change", function () {
-        document.getElementById("credit_card_container").style.display = this.value === "credit_card" ? "block" : "none";
+        document.getElementById("credit_card_container").style.display = this.value === "credit_card" ? "block" : "none"; 
         document.getElementById("discount_pix").style.display = this.value === "pix" ? "block" : "none";
     });
 
     checkoutButton.addEventListener("click", function () {
         let paymentMethod = paymentMethodSelect.value;
+
+        if (paymentMethod === "credit_card" && !validadeCreditCard()) {
+            return;
+        }
+   
         let installments = paymentMethod === "credit_card" ? parseInt(document.getElementById("installments").value) : 1;
 
-        fetch("{{ route('checkout.process') }}", {
+        fetch("/pagamento/processar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -171,6 +174,35 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Erro no checkout:", error));
     });
+
+    function validadeCreditCard() {
+        let numberCard = document.getElementById("number_card").value.replace(/\D/g, "");
+        let nameCard = document.getElementById("name_card").value.trim();
+        let documentCard = document.getElementById("document_card").value.replace(/\D/g, "");
+        let cvv = document.getElementById("cvv_card").value.replace(/\D/g, "");
+
+        if (numberCard.length !== 16) {
+            alert("O número do cartão deve ter 16 dígitos.");
+            return false;
+        }
+
+        if (nameCard.split(" ").length < 2) {
+            alert("O nome deve conter pelo menos nome e sobrenome.");
+            return false;
+        }
+
+        if (documentCard.length !== 11 && documentCard.length !== 14) {
+            alert("O campo CPF/CNPJ deve ter 11 ou 14 dígitos.");
+            return false;
+        }
+
+        if (cvv.length !== 3) {
+            alert("O CVV deve ter 3 dígitos.");
+            return false;
+        }
+
+        return true;
+    }
 });
 </script>
 
