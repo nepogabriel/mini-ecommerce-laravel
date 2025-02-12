@@ -57,7 +57,7 @@
                                         </div>
 
                                         <div class="d-flex align-items-center">
-                                            <button class="btn btn-danger remove-from-cart" data-id="{{ $item['id'] }}">
+                                            <button class="btn btn-danger remove-from-cart" data-id="{{ $item['id'] }}" data-bs-toggle="modal" data-bs-target="#removeFromCart">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -102,6 +102,20 @@
         </div>
     </div>
 
+    <div class="modal fade" id="removeFromCart" tabindex="-1" aria-labelledby="removeFromCartLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body d-flex justify-content-center">
+                    Deseja remover o produto do carrinho?
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirm-remove-from-cart">Remover</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="bg-dark text-white py-3">
         <div class="container d-flex justify-content-center">
             Desenvolvido por Gabriel Ribeiro.
@@ -118,11 +132,21 @@
     <script>
         loadCart();
 
-        function removeProductFromCart() {
-            document.querySelectorAll(".remove-from-cart").forEach(button => {
-                button.addEventListener("click", function () {
-                    const productId = this.getAttribute('data-id');
+        let productId = null;
 
+        function removeProductFromCartTeste() {            
+            document.querySelectorAll(".remove-from-cart").forEach(button => {
+                button.addEventListener("click", function() {
+                    productId = this.getAttribute("data-id");
+                });
+            });
+
+            requestToRemoveProductFromCart();
+        }
+
+        function requestToRemoveProductFromCart() {
+            document.getElementById("confirm-remove-from-cart").addEventListener("click", function() {
+                if (productId) {
                     fetch('/carrinho/remover', {
                         method: 'DELETE',
                         headers: {
@@ -142,11 +166,11 @@
                         }
                     })
                     .catch(error => console.error('Erro:', error));
-                });
+                }
             });
         }
 
-        removeProductFromCart();
+        removeProductFromCartTeste();
     </script>
 </body>
 </html>
