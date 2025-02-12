@@ -42,7 +42,7 @@ class CalculateCartTotalCaseUseTest extends TestCase
         $this->assertEquals(0, $result['total']);
     }
 
-    public function testeCalculateCartTotalWithProducts(): void
+    public function testCalculateCartTotalWithProducts(): void
     {
         $cartItems = [
             1 => 2,
