@@ -5,7 +5,7 @@ namespace App\Application\UseCases\Checkout;
 use App\Application\UseCases\Payment\CalculateCreditCardUseCase;
 use App\Application\UseCases\Payment\CalculateDiscountUseCase;
 
-class CalculateFinalAumontUseCase
+class CalculateFinalAmountUseCase
 {
     public function __construct(
         private CalculateDiscountUseCase $calculatePixDiscountUseCase,

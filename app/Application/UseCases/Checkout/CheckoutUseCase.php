@@ -12,7 +12,7 @@ class CheckoutUseCase
 {
     public function __construct(
         private CalculateCartTotalUseCase $calculateCartTotalUseCase,
-        private CalculateFinalAumontUseCase $calculateFinalAumontUseCase,
+        private CalculateFinalAmountUseCase $calculateFinalAmountUseCase,
         private CreateOrderUseCase $createOrderUseCase,
         private DeleteCartUseCase $deleteCartUseCase
     ) {}
@@ -20,7 +20,7 @@ class CheckoutUseCase
     public function executeCheckout(PaymentMethodInterface $paymentMethod, string $paymentMethodType, int|null $installments = 1): array
     {
         $totais = $this->calculateCartTotalUseCase->calculateCartToTotal('cart');
-        $finalTotal = $this->calculateFinalAumontUseCase->calculateFinalAumont($totais['total'], $paymentMethodType, $installments);
+        $finalTotal = $this->calculateFinalAmountUseCase->calculateFinalAumont($totais['total'], $paymentMethodType, $installments);
 
         $processPaymentUseCase = new ProcessPaymentUseCase($paymentMethod);
         $paymentResult = $processPaymentUseCase->processPayment($finalTotal, $installments);
