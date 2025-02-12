@@ -13,7 +13,7 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::all();
     }
 
-    public function findByIds(array $ids): Collection
+    public function findByIds(array $ids)
     {
         return Product::whereIn('id', $ids)->get();
     }

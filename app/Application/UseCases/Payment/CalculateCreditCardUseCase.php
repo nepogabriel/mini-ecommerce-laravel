@@ -4,7 +4,7 @@ namespace App\Application\UseCases\Payment;
 
 class CalculateCreditCardUseCase
 {
-    private const INTEREST_RATE = 0.10;
+    private const INTEREST_RATE = 0.01;
 
     public function calculateCreditCard(float $price,  int $installments): float
     {
@@ -12,6 +12,6 @@ class CalculateCreditCardUseCase
             return $price;
         }
 
-        return  round($price * pow((1 + self::INTEREST_RATE), $installments));
+        return round($price * pow((1 + self::INTEREST_RATE), $installments), 2);
     }
 }
