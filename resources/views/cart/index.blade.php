@@ -51,7 +51,9 @@
                                     <div class="card-body d-flex justify-content-between">
                                         <div class="">
                                             <h5 class="card-title">{{ $item['name'] }}</h5>
-                                            <p class="card-text">R$ {{ $item['price'] }}</p>
+                                            <p class="card-text">
+                                                <span class="fw-bold">Qntd.:</span> {{ $item['quantity'] }} | <span class="fw-bold">R$</span> {{ $item['price'] }}
+                                            </p>
                                         </div>
 
                                         <div class="d-flex align-items-center">
