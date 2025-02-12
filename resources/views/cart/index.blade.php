@@ -134,7 +134,7 @@
 
         let productId = null;
 
-        function removeProductFromCartTeste() {            
+        function removeProductFromCart() {            
             document.querySelectorAll(".remove-from-cart").forEach(button => {
                 button.addEventListener("click", function() {
                     productId = this.getAttribute("data-id");
@@ -170,7 +170,7 @@
             });
         }
 
-        removeProductFromCartTeste();
+        removeProductFromCart();
     </script>
 </body>
 </html>
