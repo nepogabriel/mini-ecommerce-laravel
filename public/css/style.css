@@ -1,5 +1,11 @@
-.icon-cart-menu {
+.icon-cart-menu,
+.icon-social-footer {
     font-size: 30px
+}
+
+.link-social-footer {
+    color: #FFF;
+    margin: 0 5px;
 }
 
 @media (max-width: 768px) {
