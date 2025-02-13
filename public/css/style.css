@@ -1,0 +1,15 @@
+.icon-cart-menu {
+    font-size: 30px
+}
+
+@media (max-width: 768px) {
+    .link-logo-menu {
+        width: 60%;
+        height: auto;
+    }
+    
+    .logo-menu {
+        width: 100%;
+        height: auto;
+    }
+}
