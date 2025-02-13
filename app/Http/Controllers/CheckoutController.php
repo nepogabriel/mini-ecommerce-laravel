@@ -45,6 +45,6 @@ class CheckoutController extends Controller
 
         $checkoutData = $this->checkoutUseCase->executeCheckout($paymentMethod, $paymentMethodType, $installments);
 
-        return response()->json($checkoutData);
+        return to_route('success.index')->with('checkoutData', $checkoutData);
     }
 }

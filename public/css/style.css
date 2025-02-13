@@ -1,5 +1,6 @@
 .container-cart,
-.container-checkout {
+.container-checkout,
+.container-success {
     flex: 1;
 }
 

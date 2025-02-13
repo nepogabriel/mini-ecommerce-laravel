@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SuccessController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'index'])->name('product.index');
@@ -16,3 +17,5 @@ Route::controller(CartController::class)->group(function () {
 
 route::get('/pagamento', [CheckoutController::class, 'index'])->name('checkout.index');
 route::post('/pagamento/processar', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
+
+route::get('/confirmado', [SuccessController::class, 'index'])->name('success.index');
