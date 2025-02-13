@@ -5,9 +5,12 @@
     
     <div class="row">
         <div class="col-sm-12 col-md-8 my-4">
+        <form action="{{ route('checkout.process') }}" id="form_payment" method="post">
+            @csrf
+            
             <div>
                 <h4>Forma de Pagamento</h4>
-                <select id="payment_method" class="form-select">
+                <select id="payment_method" name="payment_method" class="form-select">
                     <option value="pix">Pix</option>
                     <option value="credit_card">Cartão de Crédito</option>
                 </select>
@@ -24,7 +27,6 @@
 
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="card-body">
-                                <form action="" method="post">
                                     <div class="mb-3">
                                         <label for="number_card" class="form-label">Número do cartão*</label>
                                         <input type="text" name="number_card" class="form-control" id="number_card">
@@ -75,14 +77,12 @@
                                             @endfor
                                         </select>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div id="response"></div>
+        </form>
         </div>
     
 
@@ -148,7 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
    
         let installments = paymentMethod === "credit_card" ? parseInt(document.getElementById("installments").value) : 1;
 
-        fetch("/pagamento/processar", {
+        document.getElementById('form_payment').submit();
+
+        /*fetch("/pagamento/processar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -158,9 +160,9 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            responseDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            window.location.replace("/confirmado");
         })
-        .catch(error => console.error("Erro no checkout:", error));
+        .catch(error => console.error("Erro no checkout:", error));*/
     });
 
     function validadeCreditCard() {
