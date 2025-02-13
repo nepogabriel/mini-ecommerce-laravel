@@ -12,4 +12,4 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon.png') }}">
     <title>Mini e-commerce</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">

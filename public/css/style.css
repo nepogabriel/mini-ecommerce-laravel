@@ -1,6 +1,18 @@
+.container-cart,
+.container-checkout {
+    flex: 1;
+}
+
 .icon-cart-menu,
 .icon-social-footer {
     font-size: 30px
+}
+
+.page-title {
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+    margin: 20px 0;
 }
 
 .link-social-footer {

@@ -1,4 +1,4 @@
-@include('components.menu');
+@include('components.menu')
 
 <div class="container my-5">
     @if ($products != null)

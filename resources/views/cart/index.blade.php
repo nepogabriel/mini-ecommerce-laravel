@@ -1,6 +1,7 @@
-@include('components.menu');
+@include('components.menu')
 
-<div class="container my-5">
+<div class="container my-5 container-cart">
+    <h2 class="page-title">Carrinho</h2>
     <div class="row">
         <div class="col-sm-12 col-md-8">
             @if (!isset($cartItems['empty']))
@@ -80,7 +81,7 @@
     </div>
 </div>
 
-@include('components.footer');
+@include('components.footer')
 
 <script>
     loadCart();
